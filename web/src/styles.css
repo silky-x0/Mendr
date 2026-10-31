@@ -23,3 +23,83 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
 }
+
+/* Motion primitives. Trigger: data-in="true" on the element or an ancestor.
+   --i = item index (stagger), --strike-delay = extra wait for .m-strike. */
+.m-strike {
+  position: relative;
+}
+.m-strike::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 52%;
+  height: 1px;
+  background: var(--color-red);
+  transform-origin: left;
+}
+.m-press {
+  transition: color 150ms var(--ease-spec);
+}
+.m-press:active {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .m-press {
+    transition:
+      color 150ms var(--ease-spec),
+      transform 150ms var(--ease-spec);
+  }
+
+  html.js .m-rise,
+  html.js .m-rule,
+  html.js .m-strike::after,
+  html.js .m-stamp,
+  html.js .m-after-strike {
+    transition-timing-function: var(--ease-spec);
+    transition-delay: calc(var(--i, 0) * 60ms);
+  }
+  html.js .m-rise {
+    transition-property: opacity, transform;
+    transition-duration: 500ms;
+  }
+  html.js .m-rule {
+    transform-origin: left;
+    transition-property: transform;
+    transition-duration: 500ms;
+  }
+  html.js .m-strike::after {
+    transition-property: transform;
+    transition-duration: 500ms;
+    transition-delay: calc(var(--i, 0) * 60ms + var(--strike-delay, 0ms));
+  }
+  html.js .m-stamp {
+    transition-property: opacity, transform;
+    transition-duration: 200ms;
+  }
+  html.js .m-after-strike {
+    transition-property: opacity;
+    transition-duration: 400ms;
+    transition-delay: calc(var(--i, 0) * 60ms + var(--strike-delay, 0ms) + 500ms);
+  }
+
+  html.js .m-rise:not([data-in="true"] .m-rise, .m-rise[data-in="true"]) {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  html.js .m-rule:not([data-in="true"] .m-rule, .m-rule[data-in="true"]) {
+    transform: scaleX(0);
+  }
+  html.js .m-strike:not([data-in="true"] .m-strike, .m-strike[data-in="true"])::after {
+    transform: scaleX(0);
+  }
+  html.js .m-stamp:not([data-in="true"] .m-stamp, .m-stamp[data-in="true"]) {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  html.js .m-after-strike:not([data-in="true"] .m-after-strike, .m-after-strike[data-in="true"]) {
+    opacity: 0;
+  }
+}
