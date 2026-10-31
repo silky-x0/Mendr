@@ -31,7 +31,7 @@ export function Redline({
         {to}
       </ins>
       {note && (
-        <span className="m-after-strike ml-3 font-mono text-[13px] text-red">
+        <span className="m-after-strike block font-mono text-[13px] leading-6 text-red sm:ml-3 sm:inline">
           {note}
         </span>
       )}

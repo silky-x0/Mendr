@@ -9,7 +9,7 @@ it('renders the hero heading', () => {
   const Home = Route.options.component!
   render(<Home />)
   expect(
-    screen.getByRole('heading', { name: /Your API's contracts, kept/ }),
+    screen.getByRole('heading', { name: /Know the moment an API changes/ }),
   ).toBeTruthy()
 })
 

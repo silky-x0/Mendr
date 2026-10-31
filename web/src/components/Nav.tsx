@@ -34,7 +34,7 @@ export function Nav() {
   }, [])
 
   return (
-    <header className="sticky top-0 z-10 bg-paper">
+    <header className="sticky top-0 z-10 backdrop-blur-[3px]">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 text-sm sm:px-6">
         <a href="#" className="flex items-center gap-2 font-sans font-medium text-ink">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -54,7 +54,7 @@ export function Nav() {
               </a>
             ))}
           </div>
-          <a href="#join" className="m-press font-medium text-ink hover:text-ink-2">
+          <a href="#join" className="m-press -my-3 py-3 font-medium text-ink hover:text-ink-2">
             Join waitlist
           </a>
         </div>

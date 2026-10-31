@@ -37,8 +37,8 @@ export function WaitlistForm({ id }: { id: string }) {
     status === 'sending' ? 'Joining…' : status === 'done' ? "You're on the list" : 'Join waitlist'
 
   return (
-    <form onSubmit={onSubmit} className="w-full max-w-md">
-      <div className="flex flex-col gap-3 sm:flex-row">
+    <form onSubmit={onSubmit} className="@container w-full max-w-md">
+      <div className="flex flex-col gap-3 @sm:flex-row">
         <input
           id={`${id}-email`}
           name="email"
@@ -49,12 +49,12 @@ export function WaitlistForm({ id }: { id: string }) {
           placeholder="you@company.com"
           disabled={status === 'done'}
           onAnimationEnd={() => setShake(false)}
-          className={`h-12 min-w-0 sm:flex-1 rounded-md border border-hairline bg-sheet px-3 font-sans text-base text-ink placeholder:text-muted disabled:text-ink-2${shake ? ' m-shake' : ''}`}
+          className={`h-12 min-w-0 @sm:flex-1 rounded-md border border-hairline bg-sheet px-3 font-sans text-base text-ink placeholder:text-muted disabled:text-ink-2${shake ? ' m-shake' : ''}`}
         />
         <button
           type="submit"
           disabled={status === 'sending' || status === 'done'}
-          className="m-press inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-ink px-4 font-sans text-base font-medium text-paper hover:text-raised sm:w-48"
+          className="m-press inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-ink px-4 font-sans text-base font-medium text-paper hover:text-raised @sm:w-48"
         >
           {status === 'done' && (
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">

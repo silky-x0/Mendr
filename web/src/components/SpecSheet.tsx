@@ -15,8 +15,8 @@ export function SpecSheet() {
         <span>rev 2026-10-29</span>
         <span className="ml-auto">Example</span>
       </div>
-      <div className="overflow-x-auto px-5 py-4 leading-7 text-ink">
-        <div className="min-w-max">
+      <div className="px-5 py-4 leading-7 text-ink">
+        <div>
           <div className="m-load" style={line(1)}>charge:</div>
           <div className="m-load pl-6" style={line(2)}>id: string</div>
           <div className="m-load pl-6" style={line(3)}>

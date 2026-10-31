@@ -13,23 +13,23 @@ export function TrustModel() {
       <p className="m-rise mt-5 max-w-2xl text-base text-ink-2" style={idx(2)}>
         Nobody hands a new tool merge access on day one. Mendr doesn't ask you to.
       </p>
-      <div className="mt-10 overflow-x-auto">
-        <table className="w-full min-w-[40rem] border-collapse text-left text-base">
-          <thead>
-            <tr className="border-b border-hairline font-mono text-[13px] text-muted">
-              <th scope="col" className="py-2 pr-4 font-normal">Tier</th>
-              <th scope="col" className="py-2 pr-4 font-normal">What Mendr may do</th>
-              <th scope="col" className="py-2 font-normal">Who decides</th>
+      <div className="mt-10 sm:overflow-x-auto">
+        <table role="table" className="block w-full border-collapse text-left text-base sm:table sm:min-w-[40rem]">
+          <thead role="rowgroup" className="max-sm:sr-only">
+            <tr role="row" className="border-b border-hairline font-mono text-[13px] text-muted">
+              <th scope="col" role="columnheader" className="py-2 pr-4 font-normal">Tier</th>
+              <th scope="col" role="columnheader" className="py-2 pr-4 font-normal">What Mendr may do</th>
+              <th scope="col" role="columnheader" className="py-2 font-normal">Who decides</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody role="rowgroup" className="block sm:table-row-group">
             {tiers.map(([tier, may, who], k) => (
-              <tr key={tier} className="m-rise border-b border-hairline align-top" style={idx(k + 3)}>
-                <th scope="row" className="py-4 pr-4 font-sans font-medium text-ink">{tier}</th>
-                <td className="py-4 pr-4 text-ink-2">{may}</td>
-                <td className="py-4">
+              <tr key={tier} role="row" className="m-rise block border-b border-hairline py-4 align-top sm:table-row sm:py-0" style={idx(k + 3)}>
+                <th scope="row" role="rowheader" className="block font-sans sm:table-cell sm:py-4 sm:pr-4 font-medium text-ink">{tier}</th>
+                <td role="cell" className="mt-1 block text-ink-2 sm:mt-0 sm:table-cell sm:py-4 sm:pr-4">{may}</td>
+                <td role="cell" className="mt-3 block sm:mt-0 sm:table-cell sm:py-4">
                   <span
-                    className="m-stamp inline-block rounded border border-ink px-2 py-0.5 font-mono text-[13px] text-ink"
+                    className="m-stamp inline-block whitespace-nowrap rounded border border-ink px-2 py-0.5 font-mono text-[13px] text-ink"
                     style={{ ...idx(k + 3), transitionDelay: `calc(var(--i) * 60ms + 300ms)` }}
                   >
                     {who}

@@ -33,21 +33,21 @@ export function HowItWorks() {
         ))}
       </ol>
       <h3 className="mt-14 font-mono text-[13px] text-muted">What Mendr watches</h3>
-      <div className="mt-3 overflow-x-auto">
-        <table className="w-full min-w-[32rem] border-collapse text-left text-base">
-          <thead>
-            <tr className="border-b border-hairline font-mono text-[13px] font-normal text-muted">
-              <th scope="col" className="py-2 pr-4 font-normal">Surface</th>
-              <th scope="col" className="py-2 pr-4 font-normal">What changes</th>
-              <th scope="col" className="py-2 font-normal">Status</th>
+      <div className="mt-3 sm:overflow-x-auto">
+        <table role="table" className="block w-full border-collapse text-left text-base sm:table sm:min-w-[32rem]">
+          <thead role="rowgroup" className="max-sm:sr-only">
+            <tr role="row" className="border-b border-hairline font-mono text-[13px] font-normal text-muted">
+              <th scope="col" role="columnheader" className="py-2 pr-4 font-normal">Surface</th>
+              <th scope="col" role="columnheader" className="py-2 pr-4 font-normal">What changes</th>
+              <th scope="col" role="columnheader" className="py-2 font-normal">Status</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody role="rowgroup" className="block sm:table-row-group">
             {watches.map(([surface, what, status], k) => (
-              <tr key={surface} className="m-rise border-b border-hairline align-top" style={idx(k + 3)}>
-                <td className="py-3 pr-4 font-medium text-ink">{surface}</td>
-                <td className="py-3 pr-4 text-ink-2">{what}</td>
-                <td className={`py-3 font-mono text-[13px] ${status === 'Building' ? 'text-ink' : 'text-muted'}`}>{status}</td>
+              <tr key={surface} role="row" className="m-rise block border-b border-hairline py-3 align-top sm:table-row sm:py-0" style={idx(k + 3)}>
+                <td role="cell" className="block font-medium text-ink sm:table-cell sm:py-3 sm:pr-4">{surface}</td>
+                <td role="cell" className="mt-1 block text-ink-2 sm:mt-0 sm:table-cell sm:py-3 sm:pr-4">{what}</td>
+                <td role="cell" className={`mt-2 block font-mono sm:mt-0 sm:table-cell sm:py-3 text-[13px] ${status === 'Building' ? 'text-ink' : 'text-muted'}`}>{status}</td>
               </tr>
             ))}
           </tbody>
