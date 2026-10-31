@@ -51,7 +51,36 @@ it('shows error then resets', async () => {
     vi.advanceTimersByTime(4000)
   })
   expect(screen.getByText('No spam, one email when the pilot opens')).toBeTruthy()
-  expect((screen.getByRole('button') as HTMLButtonElement).disabled).toBe(false)
+  await act(async () => submit())
+  expect(fetchMock).toHaveBeenCalledTimes(2)
+})
+
+it('announces success in the live note', async () => {
+  fetchMock.mockResolvedValue({})
+  render(<WaitlistForm id="hero" />)
+  await act(async () => submit())
+  expect(screen.getByText(/We'll email you when the pilot opens/).getAttribute('aria-live')).toBe('polite')
+})
+
+it('shakes on error and clears the class on animationend', async () => {
+  fetchMock.mockRejectedValue(new Error('x'))
+  render(<WaitlistForm id="hero" />)
+  const input = screen.getByLabelText('Work email')
+  await act(async () => submit())
+  expect(input.classList.contains('m-shake')).toBe(true)
+  // jsdom lacks CSS animation support, so React may listen for the prefixed name
+  fireEvent.animationEnd(input)
+  fireEvent(input, new Event('webkitAnimationEnd', { bubbles: true }))
+  expect(input.classList.contains('m-shake')).toBe(false)
+})
+
+it('clears the reset timer on unmount', async () => {
+  fetchMock.mockRejectedValue(new Error('x'))
+  const { unmount } = render(<WaitlistForm id="hero" />)
+  await act(async () => submit())
+  expect(vi.getTimerCount()).toBe(1)
+  unmount()
+  expect(vi.getTimerCount()).toBe(0)
 })
 
 it('ignores second submit while sending', async () => {

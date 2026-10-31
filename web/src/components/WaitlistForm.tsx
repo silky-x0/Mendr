@@ -26,7 +26,10 @@ export function WaitlistForm({ id }: { id: string }) {
     } catch {
       setStatus('error')
       setShake(true)
-      timer.current = setTimeout(() => setStatus('idle'), 4000)
+      timer.current = setTimeout(() => {
+        setStatus('idle')
+        setShake(false)
+      }, 4000)
     }
   }
 
@@ -69,8 +72,15 @@ export function WaitlistForm({ id }: { id: string }) {
           {label}
         </button>
       </div>
-      <p aria-live="polite" className="mt-3 font-mono text-xs text-muted">
-        {status === 'error' ? 'Something went wrong, try again' : 'No spam, one email when the pilot opens'}
+      <p
+        aria-live="polite"
+        className={`mt-3 font-mono text-xs ${status === 'error' ? 'text-ink' : 'text-muted'}`}
+      >
+        {status === 'error'
+          ? 'Something went wrong, try again'
+          : status === 'done'
+            ? "You're on the list. We'll email you when the pilot opens"
+            : 'No spam, one email when the pilot opens'}
       </p>
     </form>
   )

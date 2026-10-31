@@ -103,7 +103,7 @@ body {
     opacity: 0;
   }
 
-  .m-shake {
+  html.js .m-shake {
     animation: m-shake 300ms var(--ease-spec);
   }
   html.js .m-check {
