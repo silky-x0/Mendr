@@ -4,6 +4,9 @@ import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import { WAITLIST_ENDPOINT, WaitlistForm } from './WaitlistForm'
 
 const fetchMock = vi.fn()
+// what Apps Script sends back: JSON from the script, or an HTML error page when the script throws
+const reply = (json: unknown, ok = true) => ({ ok, json: async () => json })
+const htmlError = { ok: true, json: async () => { throw new SyntaxError('Unexpected token <') } }
 
 beforeEach(() => {
   vi.useFakeTimers()
@@ -21,21 +24,21 @@ function submit(email = 'a@b.co') {
 }
 
 it('posts email and timestamp', async () => {
-  fetchMock.mockResolvedValue({})
+  fetchMock.mockResolvedValue(reply({ ok: true }))
   render(<WaitlistForm id="hero" />)
   await act(async () => submit())
   expect(fetchMock).toHaveBeenCalledTimes(1)
   const [url, init] = fetchMock.mock.calls[0]
   expect(url).toBe(WAITLIST_ENDPOINT)
   expect(init.method).toBe('POST')
-  expect(init.mode).toBe('no-cors')
+  expect(init.mode).toBeUndefined() // response must be readable to confirm the row was written
   expect(init.body).toBeInstanceOf(URLSearchParams)
   expect(init.body.get('Email')).toBe('a@b.co')
   expect(new Date(init.body.get('Timestamp')).toISOString()).toBe(init.body.get('Timestamp'))
 })
 
 it('shows success', async () => {
-  fetchMock.mockResolvedValue({})
+  fetchMock.mockResolvedValue(reply({ ok: true }))
   render(<WaitlistForm id="hero" />)
   await act(async () => submit())
   expect(screen.getByRole('button').textContent).toContain("You're on the list")
@@ -55,8 +58,22 @@ it('shows error then resets', async () => {
   expect(fetchMock).toHaveBeenCalledTimes(2)
 })
 
+it('shows error when the script reports failure', async () => {
+  fetchMock.mockResolvedValue(reply({ ok: false, error: 'sheet missing' }))
+  render(<WaitlistForm id="hero" />)
+  await act(async () => submit())
+  expect(screen.getByText('Something went wrong, try again')).toBeTruthy()
+})
+
+it('shows error when the script crashes with an HTML page', async () => {
+  fetchMock.mockResolvedValue(htmlError)
+  render(<WaitlistForm id="hero" />)
+  await act(async () => submit())
+  expect(screen.getByText('Something went wrong, try again')).toBeTruthy()
+})
+
 it('announces success in the live note', async () => {
-  fetchMock.mockResolvedValue({})
+  fetchMock.mockResolvedValue(reply({ ok: true }))
   render(<WaitlistForm id="hero" />)
   await act(async () => submit())
   expect(screen.getByText(/We'll email you when the pilot opens/).getAttribute('aria-live')).toBe('polite')

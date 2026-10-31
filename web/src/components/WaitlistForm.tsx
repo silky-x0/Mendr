@@ -20,8 +20,11 @@ export function WaitlistForm({ id }: { id: string }) {
     setStatus('sending')
     const body = new URLSearchParams({ Email: email, Timestamp: new Date().toISOString() })
     try {
-      // no-cors: Apps Script sends no CORS headers; the response is opaque
-      await fetch(WAITLIST_ENDPOINT, { method: 'POST', mode: 'no-cors', body })
+      // Read the reply: a successful script answers {"ok":true} via a CORS-enabled redirect.
+      // A crashing script returns an HTML error page, so anything else counts as failure.
+      const res = await fetch(WAITLIST_ENDPOINT, { method: 'POST', body })
+      const data = await res.json().catch(() => null)
+      if (!res.ok || data?.ok !== true) throw new Error('waitlist not saved')
       setStatus('done')
     } catch {
       setStatus('error')
