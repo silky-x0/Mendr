@@ -102,4 +102,21 @@ body {
   html.js .m-after-strike:not([data-in="true"] .m-after-strike, .m-after-strike[data-in="true"]) {
     opacity: 0;
   }
+
+  .m-shake {
+    animation: m-shake 300ms var(--ease-spec);
+  }
+  html.js .m-check {
+    stroke-dasharray: 1;
+    animation: m-draw 300ms var(--ease-spec) both;
+  }
+}
+
+@keyframes m-shake {
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+@keyframes m-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
 }
