@@ -24,6 +24,11 @@ body {
   font-family: var(--font-sans);
 }
 
+/* No one-word last lines in body copy; headings use text-balance. */
+p, li, td, th, dd {
+  text-wrap: pretty;
+}
+
 /* Motion primitives. Trigger: data-in="true" on the element or an ancestor.
    --i = item index (stagger), --strike-delay = extra wait for .m-strike. */
 .m-strike {
