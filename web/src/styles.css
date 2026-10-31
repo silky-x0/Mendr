@@ -39,6 +39,10 @@ body {
   background: var(--color-red);
   transform-origin: left;
 }
+.m-del-static {
+  text-decoration: line-through;
+  text-decoration-color: var(--color-red);
+}
 .m-press {
   transition: color 150ms var(--ease-spec);
 }
@@ -85,6 +89,20 @@ body {
     transition-delay: calc(var(--i, 0) * var(--step, 60ms) + var(--strike-delay, 0ms) + 500ms);
   }
 
+  /* Hero + spec sheet: pure CSS load animation, no JS state. */
+  html.js .m-load {
+    animation: m-rise-in 500ms var(--ease-spec) both;
+    animation-delay: calc(var(--i, 0) * var(--step, 60ms));
+  }
+  html.js .m-load .m-strike::after {
+    animation: m-draw-x 500ms var(--ease-spec) both;
+    animation-delay: calc(var(--i, 0) * var(--step, 60ms) + var(--strike-delay, 0ms));
+  }
+  html.js .m-load .m-after-strike {
+    animation: m-fade-in 400ms var(--ease-spec) both;
+    animation-delay: calc(var(--i, 0) * var(--step, 60ms) + var(--strike-delay, 0ms) + 500ms);
+  }
+
   html.js .m-rise:not([data-in="true"] .m-rise, .m-rise[data-in="true"]) {
     opacity: 0;
     transform: translateY(8px);
@@ -112,6 +130,18 @@ body {
   }
 }
 
+@keyframes m-rise-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes m-draw-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes m-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 @keyframes m-shake {
   20%, 60% { transform: translateX(-4px); }
   40%, 80% { transform: translateX(4px); }

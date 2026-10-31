@@ -49,7 +49,7 @@ export function WaitlistForm({ id }: { id: string }) {
           placeholder="you@company.com"
           disabled={status === 'done'}
           onAnimationEnd={() => setShake(false)}
-          className={`h-12 min-w-0 flex-1 rounded-md border border-hairline bg-sheet px-3 font-sans text-base text-ink placeholder:text-muted disabled:text-ink-2${shake ? ' m-shake' : ''}`}
+          className={`h-12 min-w-0 sm:flex-1 rounded-md border border-hairline bg-sheet px-3 font-sans text-base text-ink placeholder:text-muted disabled:text-ink-2${shake ? ' m-shake' : ''}`}
         />
         <button
           type="submit"

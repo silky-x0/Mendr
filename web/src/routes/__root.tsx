@@ -1,4 +1,6 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
+
+import { useEffect } from 'react'
 
 import appCss from '../styles.css?url'
 
@@ -38,14 +40,33 @@ export const Route = createRootRoute({
       { rel: 'stylesheet', href: fonts },
       { rel: 'stylesheet', href: appCss },
     ],
-    scripts: [{ children: "document.documentElement.classList.add('js')" }],
+    scripts: [
+      {
+        children:
+          "document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mendrMounted)document.documentElement.classList.remove('js')},3000)",
+      },
+    ],
   }),
+  component: RootComponent,
   shellComponent: RootDocument,
 })
 
+declare global {
+  interface Window {
+    __mendrMounted?: boolean
+  }
+}
+
+export function RootComponent() {
+  useEffect(() => {
+    window.__mendrMounted = true
+  }, [])
+  return <Outlet />
+}
+
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
