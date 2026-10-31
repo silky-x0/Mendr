@@ -15,7 +15,7 @@ const watches = [
 
 export function HowItWorks() {
   return (
-    <Section id="how" num={2} label="How it works" title="From a stray 400 to the line that needs fixing">
+    <Section id="how" label="How it works" title="From a stray 400 to the line that needs fixing">
       <p className="m-rise mt-5 max-w-2xl text-base text-ink-2" style={idx(2)}>
         Mendr reads the OpenTelemetry HTTP spans your stack already emits. Detection is plain statistics. A model only helps explain what changed.
       </p>

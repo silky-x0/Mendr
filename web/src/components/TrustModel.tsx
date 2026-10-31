@@ -9,7 +9,7 @@ const tiers = [
 
 export function TrustModel() {
   return (
-    <Section id="trust" num={3} label="Trust model" title="Autonomy you grant, one tier at a time">
+    <Section id="trust" label="Trust model" title="Autonomy you grant, one tier at a time">
       <p className="m-rise mt-5 max-w-2xl text-base text-ink-2" style={idx(2)}>
         Nobody hands a new tool merge access on day one. Mendr doesn't ask you to.
       </p>

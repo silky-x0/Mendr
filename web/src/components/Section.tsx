@@ -5,14 +5,12 @@ const i = (n: number) => ({ '--i': n }) as CSSProperties
 
 export function Section({
   id,
-  num,
   label,
   title,
   children,
   center,
 }: {
   id: string
-  num: number
   label: string
   title: string
   children: ReactNode
@@ -28,7 +26,7 @@ export function Section({
     >
       <div className="m-rule h-px bg-hairline" />
       <p className="mt-4 font-mono text-[13px] text-muted">
-        §{num} {label}
+        {label}
       </p>
       <h2
         className={`m-rise mt-3 max-w-3xl font-serif text-3xl font-medium leading-tight text-ink sm:text-4xl ${center ? 'mx-auto text-center' : ''}`}

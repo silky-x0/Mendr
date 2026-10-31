@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
 const links = [
-  ['problem', '§1 Problem'],
-  ['how', '§2 How it works'],
-  ['trust', '§3 Trust'],
+  ['problem', 'Problem'],
+  ['how', 'How it works'],
+  ['trust', 'Trust'],
 ] as const
 
 export function Nav() {
