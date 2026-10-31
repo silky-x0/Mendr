@@ -59,7 +59,7 @@ body {
   html.js .m-stamp,
   html.js .m-after-strike {
     transition-timing-function: var(--ease-spec);
-    transition-delay: calc(var(--i, 0) * 60ms);
+    transition-delay: calc(var(--i, 0) * var(--step, 60ms));
   }
   html.js .m-rise {
     transition-property: opacity, transform;
@@ -73,7 +73,7 @@ body {
   html.js .m-strike::after {
     transition-property: transform;
     transition-duration: 500ms;
-    transition-delay: calc(var(--i, 0) * 60ms + var(--strike-delay, 0ms));
+    transition-delay: calc(var(--i, 0) * var(--step, 60ms) + var(--strike-delay, 0ms));
   }
   html.js .m-stamp {
     transition-property: opacity, transform;
@@ -82,7 +82,7 @@ body {
   html.js .m-after-strike {
     transition-property: opacity;
     transition-duration: 400ms;
-    transition-delay: calc(var(--i, 0) * 60ms + var(--strike-delay, 0ms) + 500ms);
+    transition-delay: calc(var(--i, 0) * var(--step, 60ms) + var(--strike-delay, 0ms) + 500ms);
   }
 
   html.js .m-rise:not([data-in="true"] .m-rise, .m-rise[data-in="true"]) {

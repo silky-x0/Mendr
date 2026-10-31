@@ -1,11 +1,16 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { Hero } from '../components/Hero'
+import { Nav } from '../components/Nav'
 
 export const Route = createFileRoute('/')({ component: Home })
 
 function Home() {
   return (
-    <main>
-      <h1 className="font-serif font-medium">Your API's contracts, kept</h1>
-    </main>
+    <>
+      <Nav />
+      <main>
+        <Hero form={null} />
+      </main>
+    </>
   )
 }
