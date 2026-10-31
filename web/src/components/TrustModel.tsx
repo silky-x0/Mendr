@@ -24,13 +24,13 @@ export function TrustModel() {
           </thead>
           <tbody>
             {tiers.map(([tier, may, who], k) => (
-              <tr key={tier} className="m-rise border-b border-hairline align-top" style={idx(k)}>
+              <tr key={tier} className="m-rise border-b border-hairline align-top" style={idx(k + 3)}>
                 <th scope="row" className="py-4 pr-4 font-sans font-medium text-ink">{tier}</th>
                 <td className="py-4 pr-4 text-ink-2">{may}</td>
                 <td className="py-4">
                   <span
                     className="m-stamp inline-block rounded border border-ink px-2 py-0.5 font-mono text-[13px] text-ink"
-                    style={{ ...idx(k), transitionDelay: `calc(var(--i) * 60ms + 300ms)` }}
+                    style={{ ...idx(k + 3), transitionDelay: `calc(var(--i) * 60ms + 300ms)` }}
                   >
                     {who}
                   </span>

@@ -21,7 +21,7 @@ export function HowItWorks() {
       </p>
       <ol className="mt-10 grid max-w-3xl gap-6">
         {clauses.map(([n, name, head, body], k) => (
-          <li key={n} className="m-rise grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-6" style={idx(k)}>
+          <li key={n} className="m-rise grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-6" style={idx(k + 3)}>
             <span className="font-mono text-[13px] text-muted">
               {n} {name}
             </span>
@@ -44,7 +44,7 @@ export function HowItWorks() {
           </thead>
           <tbody>
             {watches.map(([surface, what, status], k) => (
-              <tr key={surface} className="m-rise border-b border-hairline align-top" style={idx(k)}>
+              <tr key={surface} className="m-rise border-b border-hairline align-top" style={idx(k + 3)}>
                 <td className="py-3 pr-4 font-medium text-ink">{surface}</td>
                 <td className="py-3 pr-4 text-ink-2">{what}</td>
                 <td className={`py-3 font-mono text-[13px] ${status === 'Building' ? 'text-ink' : 'text-muted'}`}>{status}</td>
